@@ -5,12 +5,45 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "dev":"tsx --watch src/index.ts",
-    "build":"tsc",
-    "test":"echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx --watch src/index.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Ritam Nandy",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^26.1.1",
+    "@types/nodemailer": "^8.0.1",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bullmq": "^5.80.10",
+    "cloudinary": "^2.10.0",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.0",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "ioredis": "^5.11.1",
+    "jsonwebtoken": "^9.0.3",
+    "mailgen": "^2.0.34",
+    "mongoose": "^9.8.0",
+    "morgan": "^1.11.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "request-ip": "^3.3.0",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  }
 }
