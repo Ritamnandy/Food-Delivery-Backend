@@ -1,18 +1,7 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 
-interface Iaddress
-{
-    addressLine: string;
-    houseNo?: number;
-    street: string;
-    city?: string;
-    state: string;
-    country: string;
-    pincode: number;
-    isDefault: boolean;
-    userId: Types.ObjectId;
-}
+import type{ Iaddress } from "../../interfaces/models/address.interface.js";
 
 type AddressDocument = HydratedDocument<Iaddress>;
 
