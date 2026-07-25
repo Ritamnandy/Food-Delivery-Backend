@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt, { type SignOptions, type Secret, type JwtPayload } from "jsonwebtoken";
 import { User_Roles, Login_Type } from "../../constants.js";
 import crypto from "crypto"
-import type { Iuser, IuserMethods } from "../../interfaces/models/user.interface.js";
+import type { Iuser, IuserMethods } from "../../interfaces/index.js";
 
 
 type UserDocument = HydratedDocument<Iuser, IuserMethods>

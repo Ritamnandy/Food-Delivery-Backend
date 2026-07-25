@@ -1,6 +1,6 @@
 
 import mongoose, { Schema, Model, type HydratedDocument } from "mongoose";
-import type { Icategory } from "../../interfaces/models/category.interface.js";
+import type { Icategory } from "../../interfaces/index.js";
 
 
 type CategoryDocument = HydratedDocument<Icategory>;

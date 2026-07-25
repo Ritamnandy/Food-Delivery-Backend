@@ -1,7 +1,7 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 
-import type{ Iaddress } from "../../interfaces/models/address.interface.js";
+import type{ Iaddress } from "../../interfaces/index.js";
 
 type AddressDocument = HydratedDocument<Iaddress>;
 

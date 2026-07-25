@@ -1,7 +1,7 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 
-import type { Ideliverypartner } from "../../interfaces/models/deliverypartner.interface.js";
+import type { Ideliverypartner } from "../../interfaces/index.js";
 
 type DeliverypartnerDocument = HydratedDocument<Ideliverypartner>
 type deliverypartnerModel = Model<Ideliverypartner>

@@ -2,7 +2,7 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 
-import type { Irestaurant, IrestaurantAddress } from "../../interfaces/models/restaurants.interface.js";
+import type { Irestaurant, IrestaurantAddress } from "../../interfaces/index.js";
 
 
 

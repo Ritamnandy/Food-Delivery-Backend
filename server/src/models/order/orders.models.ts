@@ -1,7 +1,7 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 import { Order_Status } from "../../constants.js";
-import type { Iorder } from "../../interfaces/models/order.interface.js";
+import type { Iorder } from "../../interfaces/index.js";
 
 
 type OrderDocument = HydratedDocument<Iorder>

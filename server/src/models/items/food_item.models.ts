@@ -1,6 +1,6 @@
 
 import mongoose, { Schema, Model, type HydratedDocument, Types } from "mongoose";
-import type { Ifood_item } from "../../interfaces/models/food_item.interface.js";
+import type { Ifood_item } from "../../interfaces/index.js";
 
 type FoodItemDocument = HydratedDocument<Ifood_item>
 type foodItemModel = Model<Ifood_item, {}, Ifood_item>
