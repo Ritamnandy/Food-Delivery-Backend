@@ -1,14 +1,6 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
-
-interface Ireview
-{
-    userId: Types.ObjectId,
-    restaurantId: Types.ObjectId,
-    foodId: Types.ObjectId,
-    rating: Types.Double,
-    review: string
-}
+import type { Ireview } from "../../interfaces/models/review.interface.js";
 
 type ReviewDocument = HydratedDocument<Ireview>
 
