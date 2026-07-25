@@ -1,20 +1,6 @@
 
 import mongoose, { Schema, Model, type HydratedDocument, Types } from "mongoose";
-import { boolean } from "zod";
-
-interface Ifood_item
-{
-    restaurantId: Types.ObjectId
-    categoryId: Types.ObjectId
-    name: string
-    description: string
-    price: Types.Double
-    discountPrice: Types.Double
-    images?: string[]
-    isVeg: boolean
-    isAvailable: boolean
-    rating: Types.Double
-}
+import type { Ifood_item } from "../../interfaces/models/food_item.interface.js";
 
 type FoodItemDocument = HydratedDocument<Ifood_item>
 type foodItemModel = Model<Ifood_item, {}, Ifood_item>
