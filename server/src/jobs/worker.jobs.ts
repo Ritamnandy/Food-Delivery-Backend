@@ -27,7 +27,7 @@ const emailWorker = new Worker( "EmailQueue", async ( job ) =>
             await sendVerificationEmail( email, userName, token );
             break;
         }
-        case 'send-forgot-password-email': {
+        case 'send-forget-password-email': {
             const { email: forgotEmail, userName, link } = job.data as forgotPasswordEmailJobData;
             await sendForgotPasswordnEmail( forgotEmail, userName, link );
             break;
