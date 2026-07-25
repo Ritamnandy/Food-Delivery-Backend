@@ -9,28 +9,15 @@ import
     sentOrderConfirmedMail,
 } from "../utils/mail.js";
 import { logger } from "../utils/logger.js";
-interface PasswordChangedJobData
-{
-    email: string
-    userName: string
-}
-interface verificationEmailJobData extends PasswordChangedJobData
-{
-    token: string
-}
-interface forgotPasswordEmailJobData extends PasswordChangedJobData
-{
-
-    link: string
-}
-interface orderConfirmedEmailJobData
-{
-    email: string
-    userName: string
-    link: string
-}
+import type {
+    verificationEmailJobData,
+    forgotPasswordEmailJobData,
+    orderConfirmedEmailJobData, PasswordChangedJobData
+} from "../interfaces/queues/queues.interface.js";
 
 
+
+// email worker for(verification, forgot password)
 const emailWorker = new Worker( "EmailQueue", async ( job ) =>
 {
     switch ( job.name )
@@ -53,7 +40,7 @@ const emailWorker = new Worker( "EmailQueue", async ( job ) =>
 
 
 
-
+// notification worker for(order confirmed, password changed)
 const notificationWorker = new Worker( "NotificationQueue", async ( job ) =>
 {
     switch ( job.name )
