@@ -2,36 +2,12 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 
+import type { Irestaurant, IrestaurantAddress } from "../../interfaces/models/restaurants.interface.js";
 
 
-interface Irestaurant
-{
-    ownerId: Types.ObjectId
-    name: string
-    description: string
-    logo: symbol
-    banner?: symbol
-    phone: string[]
-    email: string
-    openingTime: Date
-    closingTime: Date
-    isOpen: boolean
-    rating: Types.Double
-    address: IrestaurantAddress
-}
 
-type restaurantModel = Model<Irestaurant>
 
-interface IrestaurantAddress
-{
-    building?: string;
-    addressLine: string;
-    street: string;
-    state: string;
-    city?: string;
-    country: string;
-    pincode: number;
-}
+
 type restaurantAddressModel = Model<IrestaurantAddress>
 
 const restaurantAddressSchema = new Schema<IrestaurantAddress, restaurantAddressModel>( {
@@ -79,6 +55,8 @@ const restaurantAddressSchema = new Schema<IrestaurantAddress, restaurantAddress
 } )
 
 type ResturantDocument = HydratedDocument<Irestaurant>
+
+type restaurantModel = Model<Irestaurant>
 
 const restaurantSchema = new Schema<Irestaurant, restaurantModel>( {
     ownerId: {
