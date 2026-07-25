@@ -1,22 +1,9 @@
 
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 import { Order_Status } from "../../constants.js";
+import type { Iorder } from "../../interfaces/models/order.interface.js";
 
 
-interface Iorder
-{
-    orderNumber: string
-    customerId: Types.ObjectId
-    restaurantId: Types.ObjectId
-    deliveryPartnerId: Types.ObjectId
-    items: Types.ObjectId[]
-    tax: Types.Double
-    deliveryCharge: Types.Double
-    discount: Types.Double
-    grandTotal: Types.Double
-    paymentId: Types.ObjectId
-    status: Order_Status
-}
 type OrderDocument = HydratedDocument<Iorder>
 type orderModel = Model<Iorder>
 
