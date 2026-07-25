@@ -1,16 +1,5 @@
 
-import { cacheRepository } from "./cache.repository.js";
-import { authRepository } from "./user.repository.js";
-import { emailQueueRepository } from "./emailqueue.repository.js";
 
-
-
-
-
-export
-{
-    cacheRepository,
-    authRepository,
-    emailQueueRepository
-
-}
+export * from "./cache.repository.js";
+export * from "./user.repository.js";
+export * from "./emailqueue.repository.js";
