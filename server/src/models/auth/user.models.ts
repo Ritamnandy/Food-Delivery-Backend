@@ -2,32 +2,10 @@
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt, { type SignOptions, type Secret, type JwtPayload } from "jsonwebtoken";
-import { User_Roles, Login_Type } from "../constants.js";
+import { User_Roles, Login_Type } from "../../constants.js";
 import crypto from "crypto"
+import type { Iuser, IuserMethods } from "../../interfaces/models/user.interface.js";
 
-interface Iuser
-{
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneno: string,
-    password: string,
-    role: User_Roles,
-    loginType: Login_Type
-    isVerified: boolean
-    googleId?: string
-    avatar?: string
-    avatarId?: string
-    refreshToken?: string
-}
-
-interface IuserMethods
-{
-    generateAccessToken: () => string,
-    generateRefreshToken: () => string,
-    comparePassword: ( password: string ) => Promise<boolean>,
-    getPhoneNo: () => string
-}
 
 type UserDocument = HydratedDocument<Iuser, IuserMethods>
 
