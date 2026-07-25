@@ -2,16 +2,7 @@
 import mongoose, { Types, type HydratedDocument, Model, Schema } from "mongoose";
 import { Payment_Methods, Payment_Status } from "../../constants.js";
 
-interface Ipayment
-{
-    orderId: Types.ObjectId
-    customerId: Types.ObjectId
-    amount: Types.Double
-    paymentMethod: Payment_Methods
-    transactionId: string
-    status: Payment_Status
-    paidAt: Date
-}
+import type { Ipayment } from "../../interfaces/models/payment.interface.js";
 
 
 type paymentDocument = HydratedDocument<Ipayment>
