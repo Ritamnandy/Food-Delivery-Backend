@@ -1,5 +1,5 @@
 
 
-import type { RegisterBody } from "./auth.types.js";
+import type { RegisterBody, VerificationBody, LoginBody, GetToken,forgetPasswordBody, ResetpasswordBody } from "./auth.types.js";
 
-export type { RegisterBody }
+export type { RegisterBody, VerificationBody, LoginBody, GetToken, forgetPasswordBody,ResetpasswordBody }

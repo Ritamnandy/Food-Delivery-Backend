@@ -16,6 +16,10 @@ class RedisCacheRepository implements ICacheRepository
     {
         await redis.del( key );
     }
+    async keepAlive ( key: string, ttlSeconds: number ): Promise<void>
+    {
+        await redis.expire( key, ttlSeconds );
+    }
 }
 
 export const cacheRepository = new RedisCacheRepository();
