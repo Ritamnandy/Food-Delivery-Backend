@@ -18,11 +18,6 @@ const reviewSchema = new Schema<Ireview, reviewModel>( {
         ref: "Restaurant",
         required: true
     },
-    foodId: {
-        type: Types.ObjectId,
-        ref: "FoodItem",
-        required: true
-    },
     rating: {
         type: Types.Double,
         required: true
