@@ -121,8 +121,8 @@ interface Irestaurant
     ownerId: Types.ObjectId
     name: string
     description: string
-    logo: symbol
-    banner?: symbol
+    logo: string
+    banner?: string
     phone: string[]
     email: string
     openingTime: Date

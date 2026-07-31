@@ -1,7 +1,7 @@
 
 import { User, type UserDocument } from "../models/index.js";
 import { Types } from "mongoose";
-import type { IUserRepository, GetToken } from "../interfaces/index.js";
+import type { IUserRepository, GetToken,Iuser } from "../interfaces/index.js";
 class UserRepository implements IUserRepository
 {
     public async getUserById ( id: Types.ObjectId ): Promise<UserDocument | null>
@@ -13,7 +13,7 @@ class UserRepository implements IUserRepository
         return await User.findOne( { email } ).exec()
     }
 
-    public async createUser ( user: Partial<UserDocument> ): Promise<UserDocument | null>
+    public async createUser ( user: Partial<Iuser> ): Promise<UserDocument | null>
     {
         return await User.create( {
             ...user,

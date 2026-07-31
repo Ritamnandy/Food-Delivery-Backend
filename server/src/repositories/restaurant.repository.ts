@@ -1,11 +1,11 @@
 
 import { Restaurant, type ResturantDocument } from "../models/index.js";
-import type{ IRestaurantRepository } from "../interfaces/index.js";
+import type{ IRestaurantRepository,Irestaurant } from "../interfaces/index.js";
 import type { Types } from "mongoose";
 
 class RestaurantRepository implements IRestaurantRepository
 {
-    async create ( restaurant: ResturantDocument ): Promise<ResturantDocument |null>
+    async create ( restaurant: Partial<Irestaurant> ): Promise<ResturantDocument |null>
     {
         return await Restaurant.create( restaurant );
     }
