@@ -41,6 +41,13 @@ interface Iaddress
     userId: Types.ObjectId;
 }
 
+// category interface
+interface Icategory
+{
+    name: string,
+    image?: string,
+}
+
 // food item interface
 interface Ifood_item
 {
@@ -71,12 +78,7 @@ interface Iorder
     status: Order_Status
 }
 
-// category interface
-interface Icategory
-{
-    name: string,
-    image?: string,
-}
+
 
 // delivery partner interface
 interface Ideliverypartner
