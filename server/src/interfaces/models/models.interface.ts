@@ -135,7 +135,6 @@ interface Ireview
 {
     userId: Types.ObjectId,
     restaurantId: Types.ObjectId,
-    foodId: Types.ObjectId,
     rating: Types.Double,
     review: string
 }

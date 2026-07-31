@@ -1,3 +1,4 @@
+import type { Types } from "mongoose"
 
 
 interface GetToken
@@ -34,8 +35,18 @@ interface ResetpasswordBody
     password: string
 }
 
+interface ReviewBody
+{
+    restaurantId: Types.ObjectId,
+    rating: number,
+    review: string
+}
+
 export type {
     RegisterBody,
     VerificationBody,
-    LoginBody, GetToken, forgetPasswordBody, ResetpasswordBody
+    LoginBody, GetToken,
+    forgetPasswordBody,
+    ResetpasswordBody,
+    ReviewBody
 }
