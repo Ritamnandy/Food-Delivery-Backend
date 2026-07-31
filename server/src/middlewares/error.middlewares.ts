@@ -3,6 +3,8 @@ import type { Request, Response, NextFunction } from "express";
 import { ApiError } from "../utils/ApiError.js";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import { logger } from "../utils/logger.js";
+const isProduction = process.env.NODE_ENV === "production"
 
 const errorHandler = (
     err: unknown,
@@ -11,61 +13,97 @@ const errorHandler = (
     next: NextFunction
 ) =>
 {
-    let error = err
-    if ( !( error as ApiError ) )
-    {
-        let statusCode = 500
-        let message = "something went wrong"
-        let errors = [ "unknown error" ]
-        if ( error instanceof mongoose.Error.CastError )
-        {
-            statusCode = 400
-            message = `invalid ${ error.path } ${ error.value }`
-            errors = [ message ]
+    let error: ApiError;
 
-        } else if ( ( error as any )?.code === 11000 )
-        {
-            // duplicate key error 
-            statusCode = 400
-            const field = Object.keys( ( error as any ).keyValue || {} ).join( ", " )
-            message = `${ field } already exists`
-            errors = [ message ]
-        } else if ( error instanceof mongoose.Error.ValidationError )
-        {
-            statusCode = 400
-            message = Object.values( error.errors ).map( ( { message } ) => message ).join( ", " )
-            errors = [ message ]
-        } else if ( error instanceof jwt.JsonWebTokenError )
-        {
-            statusCode = 401
-            message = "invalid token"
-            errors = [ error.message ]
-        } else if ( error instanceof jwt.TokenExpiredError )
-        {
-            statusCode = 401
-            message = "token expired"
-            errors = [ "Unauthorized request please login or register again" ]
-        } else if ( error instanceof Error )
-        {
-            statusCode = ( error as any ).statusCode || 500
-            message = error.message || message
-            errors = [ message ]
-        }
-        error = new ApiError( statusCode, message, [], error instanceof Error ? error.stack : undefined )
-    }
-    const apiError = error as ApiError
-    const response = {
-        success: false,
-        message: apiError.message,
-        errors: apiError.error || [],
-        data: apiError.data,
-        ...( process.env.NODE_ENV === "development" ? { stack: apiError.stack } : {} ),
-    };
-    if ( apiError.statusCode >= 500 )
+    if ( err instanceof ApiError )
     {
-        console.error( apiError );
+        error = err;
+    } else
+    {
+        let statusCode = 500;
+        let message = "Something went wrong";
+        let errors: ( object | string )[] = [];
+        let isOperational = false;
+
+        if ( err instanceof mongoose.Error.CastError )
+        {
+            statusCode = 400;
+            message = `Invalid ${ err.path }: ${ err.value }`;
+            errors = [ message ]
+            isOperational = true;
+        } else if ( ( err as any )?.code === 11000 )
+        {
+            statusCode = 409;
+            const fields = Object.keys( ( err as any ).keyValue || {} ).join( ", " );
+            message = `Duplicate ${ fields } entered`;
+            errors = [ message ]
+            isOperational = true;
+        } else if ( err instanceof mongoose.Error.ValidationError )
+        {
+            statusCode = 400;
+            errors = Object.values( err.errors ).map( ( val ) => val.message );
+            message = errors.join( ", " );
+            isOperational = true;
+
+        } else if ( err instanceof jwt.JsonWebTokenError )
+        {
+            statusCode = 401;
+            message = "Invalid access token";
+            errors = [ "Unauthorized request, please login again" ]
+            isOperational = true;
+        } else if ( err instanceof jwt.TokenExpiredError )
+        {
+            statusCode = 401;
+            message = "Access token expired";
+            errors = [ "Unauthorized request, please login again" ]
+            isOperational = true;
+        } else if ( err instanceof jwt.NotBeforeError )
+        {
+            statusCode = 401;
+            message = "Access token not active yet";
+            errors = [ "Unauthorized request, please login again" ]
+            isOperational = true;
+        } else if ( err instanceof SyntaxError && 'body' in ( err as any ) )
+        {
+            statusCode = 400;
+            message = "Invalid JSON format in request body";
+            errors = [ message ]
+            isOperational = true;
+        } else if ( err instanceof Error )
+        {
+            statusCode = ( err as any ).statusCode || 500;
+            message = err.message || message;
+            errors = [ message ]
+            isOperational = true;
+        }
+
+        error = new ApiError(
+            statusCode,
+            message, errors,
+            isOperational,
+            isProduction ? undefined : ( err as Error ).stack
+
+        );
+
     }
-    return res.status( apiError.statusCode || 500 ).json( response );
+
+    if ( error.statusCode >= 500 )
+    {
+        logger.error(
+            `[${ new Date().toISOString() }] ${ req.method } ${ req.originalUrl } -`,
+            error
+        )
+    } else if ( !isProduction )
+    {
+        logger.warn( `[${ req.method } ${ req.originalUrl }] ${ error.message }` )
+    }
+
+
+    const responseError = isProduction && !error.isOperational ? { success: false, statusCode: error.statusCode, message: "Internal Server Error", errors: [] } : error.toJSON();
+
+
+    res.status( error.statusCode || 500 ).json( responseError );
+
 }
 
 export { errorHandler }
