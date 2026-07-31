@@ -1,6 +1,6 @@
 
 import type { Types } from "mongoose";
-import type { IReviewRepository } from "../interfaces/index.js";
+import type { IReviewRepository, Ireview } from "../interfaces/index.js";
 
 import { Review, type ReviewDocument } from "../models/index.js";
 
@@ -11,7 +11,7 @@ class ReviewRepository implements IReviewRepository
     {
         return await Review.findById( reviewId )
     }
-    async create ( review: Partial<ReviewDocument> ): Promise<ReviewDocument>
+    async create ( review: Ireview ): Promise<ReviewDocument>
     {
         return await Review.create( review )
     }
@@ -19,7 +19,7 @@ class ReviewRepository implements IReviewRepository
     {
         return await Review.findByIdAndDelete( reviewId )
     }
-    async update ( reviewId: Types.ObjectId, review: Partial<ReviewDocument> )
+    async update ( reviewId: Types.ObjectId, review: Partial<Ireview> ): Promise<ReviewDocument | null>
     {
         return await Review.findByIdAndUpdate( reviewId, review, { new: true } )
     }
