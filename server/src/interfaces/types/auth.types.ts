@@ -35,12 +35,7 @@ interface ResetpasswordBody
     password: string
 }
 
-interface ReviewBody
-{
-    restaurantId: Types.ObjectId,
-    rating: Types.Double,
-    review: string
-}
+
 
 export type {
     RegisterBody,
@@ -48,5 +43,4 @@ export type {
     LoginBody, GetToken,
     forgetPasswordBody,
     ResetpasswordBody,
-    ReviewBody
 }
