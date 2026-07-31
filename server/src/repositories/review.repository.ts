@@ -7,19 +7,23 @@ import { Review, type ReviewDocument } from "../models/index.js";
 
 class ReviewRepository implements IReviewRepository
 {
-    async createReview ( review: Partial<ReviewDocument> )
+    async findById ( reviewId: Types.ObjectId ): Promise<ReviewDocument | null>
+    {
+        return await Review.findById( reviewId )
+    }
+    async create ( review: Partial<ReviewDocument> ): Promise<ReviewDocument>
     {
         return await Review.create( review )
     }
-    async deleteReview ( reviewId: Types.ObjectId )
+    async delete ( reviewId: Types.ObjectId ): Promise<ReviewDocument | null>
     {
-        await Review.findByIdAndDelete( reviewId )
+        return await Review.findByIdAndDelete( reviewId )
     }
-    async updateReview ( reviewId: Types.ObjectId, review: Partial<ReviewDocument> )
+    async update ( reviewId: Types.ObjectId, review: Partial<ReviewDocument> )
     {
         return await Review.findByIdAndUpdate( reviewId, review, { new: true } )
     }
-    async getAllReviews ( restaurantId: Types.ObjectId )
+    async getAll ( restaurantId: Types.ObjectId ): Promise<ReviewDocument[] | []>
     {
         return await Review.find( { restaurantId } )
     }

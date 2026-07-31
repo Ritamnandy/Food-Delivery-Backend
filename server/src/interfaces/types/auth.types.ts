@@ -38,7 +38,7 @@ interface ResetpasswordBody
 interface ReviewBody
 {
     restaurantId: Types.ObjectId,
-    rating: number,
+    rating: Types.Double,
     review: string
 }
 

@@ -78,7 +78,7 @@ class AuthServices
 
         logger.info( "Register OTP issued", { email } );
     }
-    async reSendCode ( email: string ):Promise<void>
+    async reSendCode ( email: string ): Promise<void>
     {
         const onCoolDown = await this.cacheRepository.get( resendCoolDownKey( email ) );
         if ( onCoolDown )
@@ -128,7 +128,7 @@ class AuthServices
         {
             throw ApiError.badRequest( "verification session expired", [ "please sign up again" ] );
         }
-        const data = JSON.parse( cachedData );
+        const data = JSON.parse( cachedData ) as RegisterBody;
         const createdUser: UserDocument | null = await this.authRepository.createUser( data );
         if ( !createdUser )
         {
@@ -184,7 +184,7 @@ class AuthServices
     {
         await this.authRepository.logout( user );
     }
-    async refreshAccessToken ( token: string ):Promise<GetToken>
+    async refreshAccessToken ( token: string ): Promise<GetToken>
     {
         try
         {

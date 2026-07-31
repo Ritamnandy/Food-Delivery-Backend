@@ -4,8 +4,9 @@ import { Types } from "mongoose"
 import type { ReviewDocument } from "../../models/index.js"
 export interface IReviewRepository
 {
-    createReview: ( review: Partial<ReviewDocument> ) => Promise<ReviewDocument>
-    deleteReview: ( reviewId: Types.ObjectId ) => Promise<void>
-    updateReview: ( reviewId: Types.ObjectId, review: Partial<ReviewDocument> ) => Promise<ReviewDocument | null>
-    getAllReviews: ( restaurantId: Types.ObjectId ) => Promise<ReviewDocument[]>
+    findById: ( reviewId: Types.ObjectId ) => Promise<ReviewDocument | null>
+    create: ( review: Partial<ReviewDocument> ) => Promise<ReviewDocument>
+    delete: ( reviewId: Types.ObjectId ) => Promise<ReviewDocument | null>
+    update: ( reviewId: Types.ObjectId, review: Partial<ReviewDocument> ) => Promise<ReviewDocument | null>
+    getAll: ( restaurantId: Types.ObjectId ) => Promise<ReviewDocument[] | []>
 }
