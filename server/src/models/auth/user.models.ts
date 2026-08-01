@@ -155,7 +155,7 @@ if ( !refreshTokenExpiresIn )
 
 interface RefreshTokenPayload
 {
-    id: Types.ObjectId
+    id: string
     role: User_Roles,
     email: string
 }
@@ -172,7 +172,7 @@ interface AccessTokenPayload extends RefreshTokenPayload
 userSchema.methods.generateAccessToken = function (): string
 {
     const payload: AccessTokenPayload = {
-        id: this._id,
+        id: this._id.toString(),
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
@@ -186,7 +186,7 @@ userSchema.methods.generateAccessToken = function (): string
 userSchema.methods.generateRefreshToken = function (): string
 {
     const payload: RefreshTokenPayload = {
-        id: this._id,
+        id: this._id.toString(),
         role: this.role,
         email: this.email
     }

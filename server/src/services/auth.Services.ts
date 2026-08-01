@@ -297,6 +297,15 @@ class AuthServices
         return rest
     }
 
+    async getUserById ( id: string ): Promise<UserDocument>
+    {
+        const user: UserDocument | null = await this.authRepository.getUserById( id )
+        if ( !user )
+        {
+            throw new ApiError( 404, "User not found", [ "User not found" ] );
+        }
+        return user
+    }
 
 }
 
