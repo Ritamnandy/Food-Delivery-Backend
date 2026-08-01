@@ -21,7 +21,7 @@ class ReviewServices
             logger.error( "Restaurant not found", { restaurantId } );
             throw ApiError.badRequest( "Restaurant not found", [ "Invalid restaurant id" ] );
         }
-        const createdReview: ReviewDocument | null = await this.reviewRepository.create( { ...review, userId: user._id } );
+        const createdReview: ReviewDocument | null = await this.reviewRepository.create( { ...review, userId: user._id.toString() } );
         if ( !createdReview )
         {
             logger.error( "Review not created", { userId: user._id } );

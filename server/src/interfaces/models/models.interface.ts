@@ -128,8 +128,7 @@ interface Irestaurant
     openingTime: Date
     closingTime: Date
     isOpen: boolean
-    rating: Types.Double
-    address: IrestaurantAddress
+    address?: IrestaurantAddress
 }
 
 // review interface
@@ -152,6 +151,7 @@ export type {
     Ideliverypartner,
     Ipayment,
     Irestaurant,
-    Ireview
+    Ireview,
+    IrestaurantAddress
 
 }

@@ -3,7 +3,8 @@ import type { Types } from "mongoose";
 
 export interface ReviewBody
 {
-    restaurantId: Types.ObjectId,
+    userId: string
+    restaurantId: string
     rating: Types.Double,
     review: string
 }

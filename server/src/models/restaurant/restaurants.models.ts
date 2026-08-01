@@ -103,10 +103,6 @@ const restaurantSchema = new Schema<Irestaurant, restaurantModel>( {
         type: Boolean,
         default: false
     },
-    rating: {
-        type: Types.Double,
-        default: 0
-    },
     address: {
         type: restaurantAddressSchema,
         required: true
