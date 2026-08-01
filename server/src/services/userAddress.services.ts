@@ -1,16 +1,17 @@
 
 import type { UserDocument, AddressDocument } from "../models/index.js";
 import { userAddressRepository } from "../repositories/index.js";
-import type { Iaddress, UserAddressBody } from "../interfaces/index.js";
+import type { IUserAddressRepository, UserAddressBody } from "../interfaces/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logger } from "../utils/logger.js";
 
 
 class UserAddressService
 {
+    constructor ( private readonly useraddressRepository: IUserAddressRepository ) { }
     async addAddress ( user: UserDocument, address: UserAddressBody ): Promise<AddressDocument>
     {
-        const newAddress: AddressDocument | null = await userAddressRepository.create( {
+        const newAddress: AddressDocument | null = await this.useraddressRepository.create( {
             ...address,
             userId: user._id
         } )
@@ -22,9 +23,9 @@ class UserAddressService
         return newAddress
 
     }
-    async updateAddress ( addressId: string, address: Partial<Iaddress> ): Promise<AddressDocument>
+    async updateAddress ( addressId: string, address: Partial<UserAddressBody> ): Promise<AddressDocument>
     {
-        const updatedAddress: AddressDocument | null = await userAddressRepository.update( addressId, address );
+        const updatedAddress: AddressDocument | null = await this.useraddressRepository.update( addressId, address );
         if ( !updatedAddress )
         {
             logger.error( "Address not updated", { addressId } );
@@ -35,7 +36,7 @@ class UserAddressService
 
     async deleteAddress ( addressId: string ): Promise<AddressDocument>
     {
-        const deletedAddress: AddressDocument | null = await userAddressRepository.delete( addressId );
+        const deletedAddress: AddressDocument | null = await this.useraddressRepository.delete( addressId );
         if ( !deletedAddress )
         {
             logger.error( "Address not deleted", { addressId } );
@@ -45,7 +46,7 @@ class UserAddressService
     }
     async getAddresses ( userId: string ): Promise<AddressDocument[] | null>
     {
-        const addresses: AddressDocument[] | null = await userAddressRepository.getAddressById( userId );
+        const addresses: AddressDocument[] | null = await this.useraddressRepository.getAddressById( userId );
         if ( !addresses || addresses.length === 0 )
         {
             logger.error( "Addresses not found", { userId } );
@@ -55,4 +56,4 @@ class UserAddressService
     }
 }
 
-export const userAddressServices = new UserAddressService()
+export const userAddressServices = new UserAddressService( userAddressRepository )
