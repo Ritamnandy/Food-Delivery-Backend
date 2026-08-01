@@ -5,7 +5,7 @@ import {Types} from "mongoose";
 
 interface IUserRepository
 {
-    getUserById: ( id: Types.ObjectId ) => Promise<UserDocument | null>
+    getUserById: ( id: string ) => Promise<UserDocument | null>
     getUserByEmail: ( email: string ) => Promise<UserDocument | null>
     createUser: ( user: Partial<Iuser> ) => Promise<UserDocument | null>
     generateTokenPair: ( user: UserDocument ) => Promise<GetToken | null>
