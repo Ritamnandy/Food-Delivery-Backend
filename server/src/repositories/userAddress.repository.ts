@@ -5,21 +5,21 @@ import type { Types } from "mongoose";
 
 class UserAddressRepository implements IUserAddressRepository
 {
-    async getAddressById ( userId: Types.ObjectId ): Promise<AddressDocument | null>
+    async getAddressById ( userId: string ): Promise<AddressDocument[] | null>
     {
-        return Address.findOne( { user: userId } );
+        return Address.find( { userId: userId } );
     }
     async create ( address: Partial<Iaddress> ): Promise<AddressDocument>
     {
         return Address.create( address );
     }
-    async update ( addressId: Types.ObjectId, address: Partial<Iaddress> ): Promise<AddressDocument | null>
+    async update ( addressId: string, address: Partial<Iaddress> ): Promise<AddressDocument | null>
     {
-        return Address.findOneAndUpdate( addressId, address, { new: true } );
+        return Address.findOneAndUpdate( { _id: addressId }, address, { new: true } );
     }
-    async delete ( addressId: Types.ObjectId ): Promise<AddressDocument | null>
+    async delete ( addressId: string ): Promise<AddressDocument | null>
     {
-        return Address.findOneAndDelete( addressId );
+        return Address.findOneAndDelete( { _id: addressId } );
     }
 }
 
