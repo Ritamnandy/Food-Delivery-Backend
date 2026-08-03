@@ -10,11 +10,6 @@ type paymentModel = Model<Ipayment>
 
 
 const paymentSchema = new Schema<Ipayment, paymentModel>( {
-    orderId: {
-        type: Types.ObjectId,
-        ref: "Order",
-        required: true
-    },
     customerId: {
         type: Types.ObjectId,
         ref: "User",

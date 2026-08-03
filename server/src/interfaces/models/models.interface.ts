@@ -60,7 +60,7 @@ interface Ifood_item
     images?: string[]
     isVeg: boolean
     isAvailable: boolean
-    rating: Types.Double
+    rating?: Types.Double
 }
 // order interface
 interface Iorder
@@ -95,7 +95,6 @@ interface Ideliverypartner
 
 interface Ipayment
 {
-    orderId: Types.ObjectId
     customerId: Types.ObjectId
     amount: Types.Double
     paymentMethod: Payment_Methods
