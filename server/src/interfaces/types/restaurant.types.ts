@@ -11,3 +11,14 @@ export interface RestaurantBody
     closingTime: Date,
     isOpen: boolean
 }
+
+export interface RestaurantAddressBody
+{
+    building?: string;
+    addressLine: string;
+    street: string;
+    state: string;
+    city?: string;
+    country: string;
+    pincode: number;
+}

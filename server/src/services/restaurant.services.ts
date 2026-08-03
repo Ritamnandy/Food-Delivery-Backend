@@ -1,6 +1,6 @@
 
 import { restaurantRepository } from "../repositories/index.js";
-import type { IRestaurantRepository, RestaurantBody } from "../interfaces/index.js";
+import type { IRestaurantRepository, RestaurantBody,RestaurantAddressBody } from "../interfaces/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logger } from "../utils/logger.js";
 import type { ResturantDocument, UserDocument } from "../models/index.js";
@@ -50,6 +50,37 @@ class RestaurantService
             throw ApiError.badRequest( "Restaurant not found", [ "Invalid restaurant id" ] );
         }
         return restaurant
+    }
+    async addImages ( id: string, image: string[] ): Promise<ResturantDocument | null>
+    {
+        const updatedRestaurant: ResturantDocument | null = await this.restaurantRepository.addImages( id, image );
+        if ( !updatedRestaurant )
+        {
+            logger.error( "Restaurant not updated", { id } );
+            throw ApiError.badRequest( "Restaurant not updated", [ "Invalid restaurant data" ] );
+        }
+        return updatedRestaurant
+    }
+    async addAddress ( id: string, address: Partial<RestaurantAddressBody> ): Promise<ResturantDocument | null>
+    {
+        const updatedRestaurant: ResturantDocument | null = await this.restaurantRepository.addAddress( id, address );
+        if ( !updatedRestaurant )
+        {
+            logger.error( "Restaurant not updated", { id } );
+            throw ApiError.badRequest( "Restaurant not updated", [ "Invalid restaurant data" ] );
+        }
+        return updatedRestaurant
+    }
+
+    async updateAddress ( id: string, address: Partial<RestaurantAddressBody> ): Promise<ResturantDocument | null>
+    {
+        const updatedRestaurant: ResturantDocument | null = await this.restaurantRepository.updateAddress( id, address );
+        if ( !updatedRestaurant )
+        {
+            logger.error( "Restaurant not updated", { id } );
+            throw ApiError.badRequest( "Restaurant not updated", [ "Invalid restaurant data" ] );
+        }
+        return updatedRestaurant
     }
 
 }
