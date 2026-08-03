@@ -7,3 +7,4 @@ export * from "./review.repository.js";
 export * from "./restaurant.repository.js";
 export * from "./userAddress.repository.js";
 export * from "./order.repository.js";
+export * from "./fooditem.repository.js"

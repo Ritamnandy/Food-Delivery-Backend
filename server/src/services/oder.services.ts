@@ -10,12 +10,12 @@ class OrderService
 {
     constructor ( private readonly orderRepository: IorderRepository ) { }
 
-    async createOrder ( data: OrderBody, user: UserDocument ): Promise<OrderDocument>
+    async createOrder ( data: OrderBody ): Promise<OrderDocument>
     {
         const order: OrderDocument | null = await this.orderRepository.create( data )
         if ( !order )
         {
-            logger.error( "Order not created", { userId: user._id } );
+            logger.error( "Order not created" );
             throw ApiError.badRequest( "Order not created", [ "Invalid order data" ] );
         }
         return order
