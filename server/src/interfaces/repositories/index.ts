@@ -5,6 +5,7 @@ import type { IEmailQueueRepository } from "./email_queue.repository.interface.j
 import type { IReviewRepository } from "./review.repositories.interface.js";
 export * from "./restaurant.repository.interface.js";
 export * from "./userAddress.repository.interface.js";
+export * from "./order.repository.interface.js";
 export type
 {
     ICacheRepository,

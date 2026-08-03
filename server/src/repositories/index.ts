@@ -6,3 +6,4 @@ export * from "./emailqueue.repository.js";
 export * from "./review.repository.js";
 export * from "./restaurant.repository.js";
 export * from "./userAddress.repository.js";
+export * from "./order.repository.js";
