@@ -8,6 +8,7 @@ export * from "./userAddress.repository.interface.js";
 export * from "./order.repository.interface.js";
 export * from "./category.repository.interface.js";
 export * from "./food_item.repository.interface.js";
+export * from "./payment.repository.interface.js";
 export type
 {
     ICacheRepository,
