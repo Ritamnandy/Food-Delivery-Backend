@@ -28,9 +28,9 @@ const restaurantBodySchema = z.object( {
         .regex(/^[0-9]{10}$/, { message: "Phone number must be 10 digits" })
         .min( 10, { message: "Phone number must be 10 digits" } )
         .max( 10, { message: "Phone number must be 10 digits" } ),
-    openingTime: z
+    openingTime: z.coerce
         .date( { message: "Opening time is required" } ), 
-    closingTime: z
+    closingTime: z.coerce
         .date( { message: "Closing time is required" } ),
     isOpen: z
         .boolean( { message: "Is open must be a boolean type " } ),        
